@@ -1,0 +1,558 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background: #F5F5F5;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(33, 37, 41);
+}
+
+.container_content {
+    width: 100%;
+    margin-top: 20px;
+    padding-right: 12%;
+    padding-left: 12%;
+}
+
+/* Навигация */
+.header {
+    width: 100%;
+    box-shadow: 0px 0px 2px 0px rgba(33, 37, 41, 0.25);
+    background: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.navbar_container {
+    display: flex;
+    align-items: center;
+}
+
+.navbar_button_logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo_img {
+    margin-right: 10px;
+}
+
+.logo_text {
+    color: rgb(33, 37, 41);
+    font-family: Nunito;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 29px;
+    letter-spacing: 0%;
+    text-align: left;
+    margin: 0px;
+    padding-right: 30px;
+}
+
+.navbar_ul {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar_li {
+    margin-right: 20px;
+    font-family: Nunito;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+    letter-spacing: 0%;
+    text-align: left;
+    transition: background-color 0.3s, color 0.3s;
+    padding: 10px;
+    border-radius: 5px;
+    color: rgb(33, 37, 41);
+}
+
+.navbar_li a {
+    color: rgb(33, 37, 41);
+    text-decoration: none;
+}
+
+.navbar_li.active {
+    background: rgb(43, 125, 221);
+    color: #fff;
+}
+
+.navbar_li.active a {
+    color: #fff;
+}
+
+.navbar_li:hover {
+    background: rgb(43, 125, 221);
+}
+
+.navbar_li:hover a {
+    color: #fff;
+}
+
+/* Каталог */
+.banner_cat {
+    width: 100%;
+    padding-right: 64px;
+    padding-left: 64px;
+}
+
+.block_warp_button {
+    display: flex;
+}
+
+.cat_glav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrap_category {
+    margin-right: 20px;
+}
+
+.wrap_category {
+    display: inline-block;
+    width: auto;
+    height: 37px;
+    margin-right: 11px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px 0px rgba(33, 37, 41, 0.25);
+    background: rgb(255, 255, 255);
+    white-space: nowrap;
+    text-align: center;
+    padding: 5px 12px;
+    line-height: 30px;
+    border: none;
+}
+
+.text_category {
+    color: rgb(33, 37, 41);
+    font-family: Nunito;
+    font-weight: 400;
+    line-height: 25px;
+    text-align: left;
+}
+
+.zag_category {
+    color: rgb(33, 37, 41);
+    font-family: Nunito;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 29px;
+    letter-spacing: 0%;
+    text-align: left;
+}
+
+.wrap_card {
+    margin-top: 20px;
+}
+
+.card_img_tovar {
+    width: 286px;
+    height: 318px;
+    border-radius: 10px 10px 0px 0px;
+    margin-left: -12px;
+    margin-top: -12px;
+    object-fit: contain;
+}
+
+.card_tovar {
+    padding: 12px;
+    width: 286px;
+    height: auto;
+    background: rgb(255, 255, 255);
+    border-radius: 10px 10px 10px 10px;
+    transition: all .3s ease-in-out;
+}
+
+.card_tovar:hover {
+    transform: translateY(-5px);
+    transition: all .3s ease-in-out;
+}
+
+.price_and_skid {
+    display: flex;
+    align-items: center;
+}
+
+.card_price_tovar {
+    color: rgb(33, 37, 41);
+    font-family: Nunito;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 29px;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.card_price_tovar_skid {
+    color: rgba(33, 37, 41, 0.25);
+    font-family: Nunito;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0%;
+    text-align: left;
+    text-decoration-line: line-through;
+}
+
+.card_title_tovar {
+    color: rgb(33, 37, 41);
+    font-family: Nunito;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 25px;
+    text-align: left;
+}
+
+.btn_tovar {
+    display: flex;
+    width: 100%;
+    border-radius: 5px;
+    background: rgb(255, 43, 43);
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    font-family: Nunito;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 25px;
+    text-align: left;
+    border: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.tov_block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* Авторизация */
+.container_login {
+    width: 100%;
+    height: 88vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.warp_form_login {
+    width: 470px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 0px 2px 0px rgba(33, 37, 41, 0.25);
+    background: rgb(255, 255, 255);
+    padding: 40px;
+}
+
+.btn_login {
+    width: 100%;
+    height: 45px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(43, 125, 221);
+    transition: background-color 0.3s, border-color 0.3s;
+
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 29px;
+    color: white;
+}
+
+.btn_login:hover {
+    background: none;
+    border: 2px solid rgb(43, 125, 221);
+    color: rgb(43, 125, 221);
+}
+
+.text_login_glav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text_login {
+    color: rgb(33, 37, 41);
+    font-family: Nunito;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 29px;
+}
+
+/* Корзина */
+.container_basket {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 80px;
+    padding-left: 65px;
+}
+
+.basket_tovar {
+    width: 500px;
+    background: rgb(255, 255, 255);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 28px;
+    padding-right: 28px;
+    margin-top: 13px;
+}
+
+.block_text_price {
+    display: flex;
+    margin-top: 16px;
+}
+
+.btn_delete {
+    padding: 4px 20px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(255, 43, 43);
+    color: rgb(255, 255, 255);
+    font-family: Nunito;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 25px;
+}
+
+.right_block_basket {
+    width: 470px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 0px 2px 0px rgba(33, 37, 41, 0.25);
+    background: rgb(255, 255, 255);
+    padding: 16px 40px;
+}
+
+.basket_p {
+    color: rgb(33, 37, 41);
+    font-family: Nunito;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 25px;
+    margin-right: 10px;
+}
+
+.basket_price {
+    color: rgb(33, 37, 41);
+    font-family: Nunito;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 29px;
+}
+
+.left_block_1_basket {
+    margin-bottom: 20px;
+}
+
+.my-contact-form .form-group {
+    margin-bottom: 20px; /* Отступ между полями формы */
+}
+
+.my-contact-form .control-label {
+    display: block;
+    font-weight: bold;
+}
+
+.my-input-class {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    background: rgba(217, 217, 217, 0.3);
+}
+
+.my-input-class:focus {
+    border: 1px solid rgb(255, 43, 43);
+    outline: none;
+}
+
+/* Чекбокс */
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.custom-checkbox .checkbox {
+    margin-right: 10px;
+}
+
+.custom-checkbox input {
+    -webkit-appearance: none;
+    position: absolute;
+
+}
+
+.checkbox {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    background: rgba(217, 217, 217, 0.3);
+}
+
+.checkmark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: auto;
+    display: none;
+}
+
+.custom-checkbox input:checked ~ .checkbox .checkmark {
+    display: block;
+}
+
+.custom-checkbox input:checked ~ .checkbox {
+    background: rgb(43, 125, 221);
+}
+
+.text_checkbox {
+    margin-top: 15px;
+}
+
+.text_checkbox:hover {
+    color: rgb(43, 125, 221);
+}
+
+/* Описание */
+.img_opisanie {
+    width: 242px;
+    height: 298px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.zag_wrap_1_opisanie_block_1 {
+    color: rgb(33, 37, 41);
+    font-family: Nunito;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 29px;
+}
+
+.xar_wrap_1_opisanie_block_1 {
+    color: rgb(33, 37, 41);
+    font-family: Nunito;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+}
+
+.text_wrap_1_opisanie_block_1 {
+    width: 326px;
+    height: auto;
+    color: rgb(33, 37, 41);
+    font-family: Nunito;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+    word-wrap: break-word;
+}
+
+.text_2_wrap_1_opisanie_block_1 {
+    width: 668px;
+    height: auto;
+    color: rgb(33, 37, 41);
+    font-family: Nunito;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+    word-wrap: break-word;
+}
+
+.video_opisanie {
+    width: 332px;
+    height: 154px;
+    border-radius: 5px;
+}
+
+.price_opisanie {
+    color: rgb(33, 37, 41);
+    font-family: Nunito;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 49px;
+}
+
+.price_opisanie_skidka {
+    color: rgba(33, 37, 41, 0.25);
+    font-family: Nunito;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 27px;
+    text-decoration-line: line-through;
+}
+
+.btn_opisanie {
+    width: 332.15px;
+    height: 42px;
+    border-radius: 5px;
+    background: rgb(255, 43, 43);
+    border: none;
+    color: white;
+    font-family: Nunito;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 25px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrap_1_opisanie {
+    display: flex;
+}
+
+.wrap_2_opisanie {
+    display: flex;
+    flex-direction: column;
+}
+
+.top_wrap_opisanie {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 27px;
+}
+
+.wrap_1_opisanie_block_1 {
+    margin-left: 25px;
+}
+
+.video-container {
+    position: relative;
+    max-width: 100%;
+}
+
+.video_opisanie {
+    height: auto;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
