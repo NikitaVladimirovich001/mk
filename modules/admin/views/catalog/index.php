@@ -10,16 +10,10 @@ use yii\grid\GridView;
 /** @var app\models\CatalogSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = Yii::t('app', 'Catalogs');
+$this->title = Yii::t('app', 'Каталог');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="catalog-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Catalog'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -29,14 +23,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+//            'id',
             'name',
             'image',
             'video',
             'characteristics:ntext',
-            //'description:ntext',
-            //'price',
-            //'category_id',
+            'description:ntext',
+            'price',
+            'category_id',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Catalog $model, $key, $index, $column) {
@@ -46,5 +40,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
+    <p>
+        <?= Html::a(Yii::t('app', 'Создать'), ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
 </div>

@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\Rent $model */
 
-$this->title = Yii::t('app', 'Создание аренды');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Rents'), 'url' => ['index']];
+$this->title = Yii::t('app', 'Создать аренду');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Аренда'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rent-create">

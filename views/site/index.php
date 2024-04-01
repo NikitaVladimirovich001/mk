@@ -1,5 +1,7 @@
 <?php
 
+use yii\helpers\Html;
+
 $this->title = 'Каталог';
 ?>
 <div class="banner_cat">
@@ -24,7 +26,8 @@ $this->title = 'Каталог';
             <div class="wrap_card">
                 <div class="card_tovar">
                     <a href="<?= \yii\helpers\Url::toRoute(['site/opisanie-catalog', 'id'=> $item->id]) ?>" class="">
-                        <img src="http://mk/web/image/<?= $item->image ?>" class="card_img_tovar" alt="...">
+<!--                        <img src="@web/public/images/--><?//= $item->image ?><!--" class="card_img_tovar" alt="...">-->
+                        <?= Html::img('@web/public/images/products/' . $item->image) ?>
                         <div class="price_and_skid">
                             <h5 class="card_price_tovar"><?= $item->price ?></h5>
                             <h5 class="card_price_tovar_skid">2200</h5>

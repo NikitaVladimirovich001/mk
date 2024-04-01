@@ -6,6 +6,10 @@ use yii\widgets\ActiveForm;
 /** @var yii\web\View $this */
 /** @var app\models\Rent $model */
 /** @var yii\widgets\ActiveForm $form */
+$items = \app\models\CategoryRent::find()
+    ->select(['name', 'id'])
+    ->indexBy('id')
+    ->column();
 ?>
 
 <div class="rent-form">
@@ -14,9 +18,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'image')->fileInput() ?>
 
-    <?= $form->field($model, 'video')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'video')->fileInput() ?>
 
     <?= $form->field($model, 'characteristics')->textarea(['rows' => 6]) ?>
 
@@ -24,10 +28,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'price')->textInput() ?>
 
-    <?= $form->field($model, 'category_id')->textInput() ?>
+    <?= $form->field($model, 'category_id')->dropDownList($items, ['prompt'=>'Выбирите категорию']) ?>
 
-    <div class="form-group" style="    margin-top: 1%;">
-        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+    <div class="form-group">
+        <?= Html::submitButton(Yii::t('app', 'Сохранить'), ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

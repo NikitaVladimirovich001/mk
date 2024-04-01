@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 30 2024 г., 10:11
+-- Время создания: Апр 01 2024 г., 19:17
 -- Версия сервера: 10.5.17-MariaDB
 -- Версия PHP: 8.1.9
 
@@ -29,19 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `basket` (
   `id` int(11) NOT NULL,
+  `session_id` int(11) DEFAULT NULL,
   `catalog_id` int(11) DEFAULT NULL,
   `rent_id` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `basket`
---
-
-INSERT INTO `basket` (`id`, `catalog_id`, `rent_id`, `created_at`) VALUES
-(47, 4, 3, '2024-03-26 21:46:51'),
-(48, 6, NULL, '2024-03-27 16:18:53'),
-(49, 4, 3, '2024-03-27 16:52:27');
 
 -- --------------------------------------------------------
 
@@ -59,15 +51,6 @@ CREATE TABLE `catalog` (
   `price` int(11) NOT NULL,
   `category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `catalog`
---
-
-INSERT INTO `catalog` (`id`, `name`, `image`, `video`, `characteristics`, `description`, `price`, `category_id`) VALUES
-(4, 'Каталог', '2.png', NULL, '', 'wdawdawdawd', 1500, 1),
-(5, '2 ', '2.png', NULL, 'awdawdawd', 'wadawdawdawd', 1500, 2),
-(6, 'VOX PATHFINDER 10', '3.png', NULL, 'Транзисторный гитарный комбо-усилитель. Мощность 10 Ватт. 1 динамик 6,5 дюймов. 1 чистый канал, 1 канал перегруза. Модель динамиков: VOX Bulldog. Габариты: 380 (Ш) х 260 (Г) х 170 (В) мм. Вес: 4,8 кг. Цвет: Черный.', 'Портативный гитарный комбоусилитель VOX PATHFINDER 10 с двумя каналами звучания компании VOX подарит отличное время практики в домашних условиях и музицирования в небольших репетиционных помещениях. Гитарный комбо поможет значительно расширить возможности как практикующих, так и начинающих гитаристов. Компактный комбо для электрогитары PATHFINDER 10 (VOX) имеет выходную мощность в 10 Вт (RMS), благодаря чему гитарист может получить достаточно громкое и качественное звучание. За мощное звучание комбо отвечает один динамик VOX Bulldog размером 6,5 дюймов. Для коммутации электрогитары используется стандартный вход с разъёмом 1/4 Jack. Купить портативный комбоусилитель для электрогитары VOX PATHFINDER 10 можно в нашем интернет магазине и в салонах продаж. Комбо предлагает идеальное сочетание качества, возможностей и уникального, мощного звучания по весьма доступной цене.', 8750, 4);
 
 -- --------------------------------------------------------
 
@@ -125,15 +108,6 @@ CREATE TABLE `proposal` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `proposal`
---
-
-INSERT INTO `proposal` (`id`, `username`, `phone_number`, `email`, `basket_id`, `created_at`) VALUES
-(51, 'Никита', '+7-(123)-918-27-39', 'qw@sd.sd', 47, '2024-03-26 21:46:51'),
-(52, 'Никита', '+7-(123)-918-27-39', 'nikital9835@gmail.com', 48, '2024-03-27 16:18:53'),
-(53, 'Никита', '+7-(123)-918-27-39', 'qw@sd.sd', 49, '2024-03-27 16:52:27');
-
 -- --------------------------------------------------------
 
 --
@@ -151,24 +125,61 @@ CREATE TABLE `rent` (
   `category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `rent`
---
-
-INSERT INTO `rent` (`id`, `name`, `image`, `video`, `characteristics`, `description`, `price`, `category_id`) VALUES
-(3, 'Аренда', '2.png', NULL, '', NULL, 200, 1);
-
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `session`
+-- Структура таблицы `sessions`
 --
 
-CREATE TABLE `session` (
+CREATE TABLE `sessions` (
   `id` int(11) NOT NULL,
   `cookie` varchar(256) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `cookie`, `created_at`) VALUES
+(45, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"3\";s:4:\"type\";s:4:\"rent\";}}', '2024-03-31 13:43:53'),
+(46, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"3\";s:4:\"type\";s:4:\"rent\";}}', '2024-03-31 13:48:49'),
+(47, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 13:50:38'),
+(48, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 13:52:05'),
+(49, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 14:00:03'),
+(50, 'a:3:{i:0;a:2:{s:2:\"id\";s:1:\"3\";s:4:\"type\";s:4:\"rent\";}i:1;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}i:2;a:2:{s:2:\"id\";s:1:\"5\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 14:09:08'),
+(51, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"5\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 14:10:07'),
+(52, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 14:11:12'),
+(53, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"6\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 14:11:51'),
+(54, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 14:12:59'),
+(55, 'a:2:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}i:1;a:2:{s:2:\"id\";s:1:\"3\";s:4:\"type\";s:4:\"rent\";}}', '2024-03-31 14:14:11'),
+(56, 'a:2:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}i:1;a:2:{s:2:\"id\";s:1:\"3\";s:4:\"type\";s:4:\"rent\";}}', '2024-03-31 14:20:05'),
+(57, 'a:3:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}i:1;a:2:{s:2:\"id\";s:1:\"6\";s:4:\"type\";s:7:\"catalog\";}i:2;a:2:{s:2:\"id\";s:1:\"3\";s:4:\"type\";s:4:\"rent\";}}', '2024-03-31 14:23:46'),
+(58, 'a:4:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}i:1;a:2:{s:2:\"id\";s:1:\"5\";s:4:\"type\";s:7:\"catalog\";}i:2;a:2:{s:2:\"id\";s:1:\"6\";s:4:\"type\";s:7:\"catalog\";}i:3;a:2:{s:2:\"id\";s:1:\"3\";s:4:\"type\";s:4:\"rent\";}}', '2024-03-31 14:25:15'),
+(59, 'a:4:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}i:1;a:2:{s:2:\"id\";s:1:\"5\";s:4:\"type\";s:7:\"catalog\";}i:2;a:2:{s:2:\"id\";s:1:\"6\";s:4:\"type\";s:7:\"catalog\";}i:3;a:2:{s:2:\"id\";s:1:\"3\";s:4:\"type\";s:4:\"rent\";}}', '2024-03-31 14:26:41'),
+(60, 'a:4:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}i:1;a:2:{s:2:\"id\";s:1:\"5\";s:4:\"type\";s:7:\"catalog\";}i:2;a:2:{s:2:\"id\";s:1:\"6\";s:4:\"type\";s:7:\"catalog\";}i:3;a:2:{s:2:\"id\";s:1:\"3\";s:4:\"type\";s:4:\"rent\";}}', '2024-03-31 14:30:23'),
+(61, 'a:2:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}i:1;a:2:{s:2:\"id\";s:1:\"5\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 15:01:02'),
+(62, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"5\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 15:04:02'),
+(63, 'a:4:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}i:1;a:2:{s:2:\"id\";s:1:\"5\";s:4:\"type\";s:7:\"catalog\";}i:2;a:2:{s:2:\"id\";s:1:\"6\";s:4:\"type\";s:7:\"catalog\";}i:3;a:2:{s:2:\"id\";s:1:\"3\";s:4:\"type\";s:4:\"rent\";}}', '2024-03-31 15:05:37'),
+(64, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"3\";s:4:\"type\";s:4:\"rent\";}}', '2024-03-31 15:10:01'),
+(65, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"3\";s:4:\"type\";s:4:\"rent\";}}', '2024-03-31 15:13:27'),
+(66, 'a:3:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}i:1;a:2:{s:2:\"id\";s:1:\"6\";s:4:\"type\";s:7:\"catalog\";}i:2;a:2:{s:2:\"id\";s:1:\"3\";s:4:\"type\";s:4:\"rent\";}}', '2024-03-31 15:26:57'),
+(67, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 15:29:47'),
+(68, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"5\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 15:30:28'),
+(69, 'a:3:{i:0;a:2:{s:2:\"id\";s:1:\"6\";s:4:\"type\";s:7:\"catalog\";}i:1;a:2:{s:2:\"id\";s:1:\"5\";s:4:\"type\";s:7:\"catalog\";}i:2;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 15:38:26'),
+(70, 'a:3:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}i:1;a:2:{s:2:\"id\";s:1:\"6\";s:4:\"type\";s:7:\"catalog\";}i:2;a:2:{s:2:\"id\";s:1:\"6\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 15:39:21'),
+(71, 'a:3:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}i:1;a:2:{s:2:\"id\";s:1:\"6\";s:4:\"type\";s:7:\"catalog\";}i:2;a:2:{s:2:\"id\";s:1:\"3\";s:4:\"type\";s:4:\"rent\";}}', '2024-03-31 15:43:37'),
+(72, 'a:3:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}i:1;a:2:{s:2:\"id\";s:1:\"5\";s:4:\"type\";s:7:\"catalog\";}i:2;a:2:{s:2:\"id\";s:1:\"6\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 15:49:56'),
+(73, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"3\";s:4:\"type\";s:4:\"rent\";}}', '2024-03-31 15:50:32'),
+(74, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 15:51:21'),
+(75, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"5\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 15:52:38'),
+(76, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"5\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 16:00:37'),
+(77, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 16:01:31'),
+(78, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"5\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 16:04:08'),
+(79, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"5\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 16:10:49'),
+(80, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"5\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 16:13:01'),
+(81, 'a:1:{i:0;a:2:{s:2:\"id\";s:1:\"5\";s:4:\"type\";s:7:\"catalog\";}}', '2024-03-31 16:15:05'),
+(82, 'a:3:{i:0;a:2:{s:2:\"id\";s:1:\"4\";s:4:\"type\";s:7:\"catalog\";}i:1;a:2:{s:2:\"id\";s:1:\"5\";s:4:\"type\";s:7:\"catalog\";}i:2;a:2:{s:2:\"id\";s:1:\"6\";s:4:\"type\";s:7:\"catalog\";}}', '2024-04-01 11:23:34');
 
 -- --------------------------------------------------------
 
@@ -200,7 +211,8 @@ INSERT INTO `user` (`id`, `username`, `password`, `created_at`) VALUES
 ALTER TABLE `basket`
   ADD PRIMARY KEY (`id`),
   ADD KEY `catalog_id` (`catalog_id`),
-  ADD KEY `rent_id` (`rent_id`);
+  ADD KEY `rent_id` (`rent_id`),
+  ADD KEY `session_id` (`session_id`);
 
 --
 -- Индексы таблицы `catalog`
@@ -236,9 +248,9 @@ ALTER TABLE `rent`
   ADD KEY `category_id` (`category_id`);
 
 --
--- Индексы таблицы `session`
+-- Индексы таблицы `sessions`
 --
-ALTER TABLE `session`
+ALTER TABLE `sessions`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -255,43 +267,43 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `basket`
 --
 ALTER TABLE `basket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
 
 --
 -- AUTO_INCREMENT для таблицы `catalog`
 --
 ALTER TABLE `catalog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT для таблицы `category_catalog`
 --
 ALTER TABLE `category_catalog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `category_rent`
 --
 ALTER TABLE `category_rent`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `proposal`
 --
 ALTER TABLE `proposal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT для таблицы `rent`
 --
 ALTER TABLE `rent`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT для таблицы `session`
+-- AUTO_INCREMENT для таблицы `sessions`
 --
-ALTER TABLE `session`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `sessions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT для таблицы `user`
@@ -308,7 +320,8 @@ ALTER TABLE `user`
 --
 ALTER TABLE `basket`
   ADD CONSTRAINT `basket_ibfk_1` FOREIGN KEY (`catalog_id`) REFERENCES `catalog` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `basket_ibfk_2` FOREIGN KEY (`rent_id`) REFERENCES `rent` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `basket_ibfk_2` FOREIGN KEY (`rent_id`) REFERENCES `rent` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `basket_ibfk_3` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `catalog`

@@ -7,12 +7,14 @@ use app\models\CatalogSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * CatalogController implements the CRUD actions for Catalog model.
  */
 class CatalogController extends Controller
 {
+    public $layout = 'main';
     /**
      * @inheritDoc
      */
@@ -65,12 +67,22 @@ class CatalogController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
+
     public function actionCreate()
     {
         $model = new Catalog();
 
         if ($this->request->isPost) {
+            $model->image = UploadedFile::getInstance($model, 'image');
+            $model->video = UploadedFile::getInstance($model, 'video');
+
             if ($model->load($this->request->post()) && $model->save()) {
+                if ($model->image) {
+                    $model->upload();
+                }
+                if ($model->video) {
+                    $model->uploadVideo();
+                }
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -81,6 +93,7 @@ class CatalogController extends Controller
             'model' => $model,
         ]);
     }
+
 
     /**
      * Updates an existing Catalog model.

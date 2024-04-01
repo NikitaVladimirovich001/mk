@@ -2,11 +2,13 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\Catalog;
 use app\models\Rent;
 use app\models\RentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * RentController implements the CRUD actions for Rent model.
@@ -71,7 +73,16 @@ class RentController extends Controller
         $model = new Rent();
 
         if ($this->request->isPost) {
+            $model->image = UploadedFile::getInstance($model, 'image');
+            $model->video = UploadedFile::getInstance($model, 'video');
+
             if ($model->load($this->request->post()) && $model->save()) {
+                if ($model->image) {
+                    $model->upload();
+                }
+                if ($model->video) {
+                    $model->uploadVideo();
+                }
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {

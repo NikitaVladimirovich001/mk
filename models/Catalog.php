@@ -17,7 +17,7 @@ use Yii;
  * @property int $category_id
  *
  * @property Basket[] $baskets
- * @property Category $category
+ * @property CategoryCatalog $category
  */
 class Catalog extends \yii\db\ActiveRecord
 {
@@ -38,8 +38,10 @@ class Catalog extends \yii\db\ActiveRecord
             [['name', 'characteristics', 'price', 'category_id'], 'required'],
             [['characteristics', 'description'], 'string'],
             [['price', 'category_id'], 'integer'],
-            [['name', 'image', 'video'], 'string', 'max' => 256],
-            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
+            ['name', 'string', 'max' => 256],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => CategoryCatalog::class, 'targetAttribute' => ['category_id' => 'id']],
+            ['image', 'file', 'extensions' => 'png, jpg', 'on'=>'update'],
+            ['video', 'file', 'extensions' => 'mp4, avi', 'on'=>'update']
         ];
     }
 
@@ -77,6 +79,46 @@ class Catalog extends \yii\db\ActiveRecord
      */
     public function getCategory()
     {
-        return $this->hasOne(Category::class, ['id' => 'category_id']);
+        return $this->hasOne(CategoryCatalog::class, ['id' => 'category_id']);
+    }
+
+    public function upload()
+    {
+        if ($this->validate()) {
+            $basePath = 'public/images/products/';
+            $currentDateFolder = date('Y-m-d');
+            $basePath .= $currentDateFolder . '/';
+
+            // Создаем папку, если ее еще нет
+            if (!file_exists($basePath)) {
+                mkdir($basePath, 0777, true);
+            }
+
+            $fileName = $this->image->baseName . '.' . $this->image->extension;
+            $this->image->saveAs($basePath . $fileName);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function uploadVideo()
+    {
+        if ($this->validate()) {
+            $basePath = 'public/video/products/';
+            $currentDateFolder = date('Y-m-d');
+            $basePath .= $currentDateFolder . '/';
+
+            // Создаем папку, если ее еще нет
+            if (!file_exists($basePath)) {
+                mkdir($basePath, 0777, true);
+            }
+
+            $fileName = $this->video->baseName . '.' . $this->video->extension;
+            $this->video->saveAs($basePath . $fileName);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
