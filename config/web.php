@@ -60,8 +60,13 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'catalog/<id:\d+>' => 'site/opisanie-catalog',
-                'filt-catalog/<category_id:\d+>' => 'site/filtercatalog',
-                'filt-rent/<category_id:\d+>' => 'site/filterrent',
+                'filt/catalog/<category_id:\d+>' => 'site/filtercatalog',
+                'filt/rent/<category_id:\d+>' => 'site/filterrent',
+                'mk-admin' => 'admin',
+                'login' => 'site/login',
+                'catalog'=> 'site/index',
+                'rent'=> 'site/rent',
+                'basket'=> 'site/basket',
             ],
         ],
 

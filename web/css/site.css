@@ -562,3 +562,11 @@ footer {
 .btn {
     margin-top: 1%;
 }
+
+.form-control {
+    margin-bottom: 1%;
+}
+
+.control-label {
+    margin-bottom: 1%;
+}

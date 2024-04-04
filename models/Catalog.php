@@ -82,20 +82,45 @@ class Catalog extends \yii\db\ActiveRecord
         return $this->hasOne(CategoryCatalog::class, ['id' => 'category_id']);
     }
 
+    public function deleteFiles()
+    {
+        // Путь к файлу изображения
+        $imagePath = $this->image;
+
+        // Путь к файлу видео
+        $videoPath = $this->video;
+
+        // Удаляем изображение, если оно существует
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+
+        // Удаляем видеофайл, если он существует
+        if (file_exists($videoPath)) {
+            unlink($videoPath);
+        }
+
+        return true;
+    }
+
     public function upload()
     {
         if ($this->validate()) {
             $basePath = 'public/images/products/';
-            $currentDateFolder = date('Y-m-d');
+            $currentDateFolder = date('Y/m/d');
             $basePath .= $currentDateFolder . '/';
 
             // Создаем папку, если ее еще нет
-            if (!file_exists($basePath)) {
+            if (!is_dir($basePath)) {
                 mkdir($basePath, 0777, true);
             }
 
-            $fileName = $this->image->baseName . '.' . $this->image->extension;
-            $this->image->saveAs($basePath . $fileName);
+            $fileName = $basePath . $this->image->baseName . '.' . $this->image->extension;
+            $this->image->saveAs($fileName);
+
+            $this->image = "../" . $fileName;
+            $this->save();
+
             return true;
         } else {
             return false;
@@ -106,16 +131,20 @@ class Catalog extends \yii\db\ActiveRecord
     {
         if ($this->validate()) {
             $basePath = 'public/video/products/';
-            $currentDateFolder = date('Y-m-d');
+            $currentDateFolder = date('Y/m/d');
             $basePath .= $currentDateFolder . '/';
 
             // Создаем папку, если ее еще нет
-            if (!file_exists($basePath)) {
+            if (!is_dir($basePath)) {
                 mkdir($basePath, 0777, true);
             }
 
-            $fileName = $this->video->baseName . '.' . $this->video->extension;
-            $this->video->saveAs($basePath . $fileName);
+            $fileName = $basePath . $this->video->baseName . '.' . $this->video->extension;
+            $this->video->saveAs($fileName);
+
+            $this->video = '../' . $fileName;
+            $this->save();
+
             return true;
         } else {
             return false;

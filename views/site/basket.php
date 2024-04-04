@@ -1,10 +1,16 @@
 <?php
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
+use yii\helpers\Url;
+use yii\widgets\MaskedInput;
 
 $this->title = 'Корзина';
-?>
+$this->registerMetaTag([
+    'name' => 'keywords',
+    'content' => 'Корзина покупок, Товары в корзине, Оформление заказа, Оплата заказа'
+]);
 
+?>
 <div class="container_basket">
     <div class="left_block_basket">
         <div class="left_block_1_basket">
@@ -14,9 +20,11 @@ $this->title = 'Корзина';
                     <div class="basket_tovar">
                         <div class="block_text_price">
                             <p class="basket_p"><?= $item->name ?></p>
-                            <p class="basket_price"><?= $item->price ?></p>
+                            <p class="basket_price">(<?= $item->price ?>₽)</p>
                         </div>
-                        <a href="<?php echo \yii\helpers\Url::toRoute(['site/remove-catalog', 'id'=>$item->id]) ?>" class=""><button class="btn_delete">Удалить</button></a>
+                        <a href="<?php echo Url::toRoute(['site/remove-catalog', 'id'=>$item->id]) ?>" class="">
+                            <button class="btn_delete">Удалить</button>
+                        </a>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
@@ -31,9 +39,11 @@ $this->title = 'Корзина';
                     <div class="basket_tovar">
                         <div class="block_text_price">
                             <p class="basket_p"><?= $item->name ?></p>
-                            <p class="basket_price"><?= $item->price ?></p>
+                            <p class="basket_price">(<?= $item->price ?>₽)</p>
                         </div>
-                        <a href="<?php echo \yii\helpers\Url::toRoute(['site/remove-rent', 'id'=>$item->id]) ?>" class=""><button class="btn_delete">Удалить</button></a>
+                        <a href="<?php echo Url::toRoute(['site/remove-rent', 'id'=>$item->id]) ?>" class="">
+                            <button class="btn_delete">Удалить</button>
+                        </a>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
@@ -53,7 +63,7 @@ $this->title = 'Корзина';
 
         <?= $form->field($model, 'username')->label('Имя')->textInput(['placeholder' => 'Имя', 'autofocus' => true, 'class' => 'my-input-class']) ?>
 
-        <?= $form->field($model, 'phone_number')->label('Телефон')->widget(\yii\widgets\MaskedInput::class, [
+        <?= $form->field($model, 'phone_number')->label('Телефон')->widget(MaskedInput::class, [
             'mask' => '+7-(999)-999-99-99',
             'options' => [
                     'placeholder' => '+7-(800)-555-35-35',

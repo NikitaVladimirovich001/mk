@@ -1,6 +1,17 @@
 <?php
 
+use yii\bootstrap5\Html;
+use yii\helpers\Url;
+
 $this->title = 'Аренда';
+$this->registerMetaTag(
+    ['name' => 'keywords',
+        'content' => 'Аренда музыкального оборудования описание, Прокат звукового оборудования описание, Аренда акустических систем описание, 
+        Прокат музыкальных инструментов описание, Аренда светового оборудования для мероприятий описание, 
+        Прокат DJ оборудования описание, Аренда микшерных консолей описание, Прокат микрофонов и аудиоаппаратуры описание, 
+        Аренда студийного оборудования описание, Прокат музыкальных эффектов и аппаратуры звукозаписи описание, mk-sound'
+    ]);
+
 ?>
 <div class="banner_cat">
 
@@ -24,14 +35,16 @@ $this->title = 'Аренда';
             <div class="wrap_card">
                 <div class="card_tovar">
                     <a href="<?= \yii\helpers\Url::toRoute(['site/opisanie-catalog', 'id'=> $item->id]) ?>" class="">
-                        <img src="http://mk/web/image/<?= $item->image ?>" class="card_img_tovar" alt="...">
+                        <?= Html::img($item->image, ['class' => 'card_img_tovar', 'alt' => $item->name]) ?>
                         <div class="price_and_skid">
-                            <h5 class="card_price_tovar"><?= $item->price ?></h5>
-                            <h5 class="card_price_tovar_skid">2200</h5>
+                            <h5 class="card_price_tovar"><?= $item->price ?>₽</h5>
+                            <h5 class="card_price_tovar_skid"><?= $item->price * 1.1 ?>₽</h5>
                         </div>
                     </a>
                     <h6 class="card_title_tovar"><?= $item->name ?></h6>
-                    <a href="<?php echo \yii\helpers\Url::toRoute(['site/add-rent', 'id' => $item->id]) ?>"><button type="submit" class="btn_tovar">В корзину</button></a>
+                    <a href="<?php echo \yii\helpers\Url::toRoute(['site/add-rent', 'id' => $item->id]) ?>">
+                        <button type="submit" class="btn_tovar">В корзину</button>
+                    </a>
                 </div>
             </div>
         <?php endforeach; ?>

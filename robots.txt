@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /mk-admin*
+Disallow: /login
+Disallow: /debug
+Disallow: /assets
+
+Allow: /catalog
+Allow: /rent
+Allow: /basket
+Disallow: /catalog/
+Disallow: /filt/catalog/
+Disallow: /filt/rent/

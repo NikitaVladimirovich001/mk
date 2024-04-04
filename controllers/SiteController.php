@@ -70,7 +70,7 @@ class SiteController extends Controller
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             if (!Yii::$app->user->isGuest) {
-                return $this->redirect(['/admin']);
+                return $this->redirect(['/admin/proposal/index']);
             }else{
                 return $this->redirect(['site/index']);
             }

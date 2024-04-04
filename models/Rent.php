@@ -87,16 +87,20 @@ class Rent extends \yii\db\ActiveRecord
     {
         if ($this->validate()) {
             $basePath = 'public/images/products/';
-            $currentDateFolder = date('Y-m-d');
+            $currentDateFolder = date('Y/m/d');
             $basePath .= $currentDateFolder . '/';
 
             // Создаем папку, если ее еще нет
-            if (!file_exists($basePath)) {
+            if (!is_dir($basePath)) {
                 mkdir($basePath, 0777, true);
             }
 
-            $fileName = $this->image->baseName . '.' . $this->image->extension;
-            $this->image->saveAs($basePath . $fileName);
+            $fileName = $basePath . $this->image->baseName . '.' . $this->image->extension;
+            $this->image->saveAs($fileName);
+
+            $this->image = "../" . $fileName;
+            $this->save();
+
             return true;
         } else {
             return false;
@@ -107,16 +111,20 @@ class Rent extends \yii\db\ActiveRecord
     {
         if ($this->validate()) {
             $basePath = 'public/video/products/';
-            $currentDateFolder = date('Y-m-d');
+            $currentDateFolder = date('Y/m/d');
             $basePath .= $currentDateFolder . '/';
 
             // Создаем папку, если ее еще нет
-            if (!file_exists($basePath)) {
+            if (!is_dir($basePath)) {
                 mkdir($basePath, 0777, true);
             }
 
-            $fileName = $this->video->baseName . '.' . $this->video->extension;
-            $this->video->saveAs($basePath . $fileName);
+            $fileName = $basePath . $this->video->baseName . '.' . $this->video->extension;
+            $this->video->saveAs($fileName);
+
+            $this->video = '../' . $fileName;
+            $this->save();
+
             return true;
         } else {
             return false;
