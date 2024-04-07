@@ -23,7 +23,7 @@ $this->registerMetaTag(
                 <?php if ($catalog->image): ?>
                     <img src="<?= $catalog->image ?>" alt="" class="img_opisanie">
                 <?php else: ?>
-                    <img src="../image/logo.png" alt="" class="img_opisanie">
+                    <img src="../image/1.png" alt="" class="img_opisanie">
                 <?php endif; ?>
                 <div class="wrap_1_opisanie_block_1">
                     <h4 class="zag_wrap_1_opisanie_block_1"><?= $catalog->name ?></h4>
@@ -36,7 +36,7 @@ $this->registerMetaTag(
                     <?php if ($catalog->video): ?>
                         <video loop autoplay muted controls src="<?= $catalog->video ?>" class="video_opisanie"></video>
                     <?php else: ?>
-                        <img src="../image/logo.png" alt="" class="img_opisanie">
+                        <img src="../image/2.png" alt="" class="video_opisanie">
                     <?php endif; ?>
                 </div>
                 <div class="button_opisanie">
@@ -58,9 +58,9 @@ $this->registerMetaTag(
         <div class="top_wrap_opisanie">
             <div class="wrap_1_opisanie">
                 <?php if ($rent->image): ?>
-                    <img src="<?= $catalog->image ?>" alt="" class="img_opisanie">
+                    <img src="<?= $rent->image ?>" alt="" class="img_opisanie">
                 <?php else: ?>
-                    <img src="../image/logo.png" alt="" class="img_opisanie">
+                    <img src="../image/1.png" alt="" class="img_opisanie_non">
                 <?php endif; ?>
                 <div class="wrap_1_opisanie_block_1">
                     <h4 class="zag_wrap_1_opisanie_block_1"><?= $rent->name ?></h4>
@@ -73,7 +73,7 @@ $this->registerMetaTag(
                     <?php if ($rent->video): ?>
                         <video loop autoplay muted controls src="<?= $rent->video ?>" class="video_opisanie"></video>
                     <?php else: ?>
-                        <img src="../image/logo.png" alt="" class="img_opisanie">
+                        <img src="../image/2.png" alt="" class="video_opisanie">
                     <?php endif; ?>
                 </div>
                 <div class="button_opisanie">

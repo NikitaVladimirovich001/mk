@@ -145,11 +145,11 @@ class SiteController extends Controller
                 // Очищаем корзину в сессии
                 $session->remove('basket');
 
-                Yii::$app->session->setFlash('success', 'Заявка успешно отправлена.');
+                Yii::$app->session->setFlash('success', 'Корзина успешно отправлена, пожалуйста подождите.');
                 return $this->redirect(['site/index']);
             } else {
                 // Если сохранение не удалось, обработка ошибки
-                Yii::$app->session->setFlash('error', 'Произошла ошибка при сохранении заявки.');
+                Yii::$app->session->setFlash('error', 'Произошла ошибка обратитесь по номеру телефона.');
             }
         }
 

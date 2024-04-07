@@ -21,7 +21,7 @@ $this->registerMetaTag(
             <h4 class="zag_category">Категории</h4>
             <div class="block_warp_button">
                 <?php foreach ($categories as $item): ?>
-                    <a href="<?= Yii::$app->urlManager->createUrl(['/site/filtercatalog', 'category_id' => $item->id]) ?>">
+                    <a href="<?= Yii::$app->urlManager->createUrl(['/site/filtercatalog', 'category_id' => $item->id]) ?>" style="">
                         <button class="wrap_category">
                             <p class="text_category"><?= $item->name ?></p>
                         </button>

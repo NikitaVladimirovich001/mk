@@ -8,5 +8,5 @@ Allow: /catalog
 Allow: /rent
 Allow: /basket
 Disallow: /catalog/
-Disallow: /filt/catalog/
-Disallow: /filt/rent/
+Disallow: /filt-catalog/
+Disallow: /filt-rent/
